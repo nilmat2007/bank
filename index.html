@@ -25,12 +25,18 @@
             width: 100%;
             height: 150px;
         }
+        button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Flex Message Preview</h1>
 
     <textarea id="jsonInput" placeholder="ใส่โค้ด JSON ของ Flex Message ที่นี่"></textarea><br><br>
+    
+    <button onclick="previewFlex()">แสดงตัวอย่าง</button>
+    <button onclick="clearInput()">ล้างข้อมูล</button>
 
     <div class="chatbox">
         <div id="preview"></div>
@@ -56,9 +62,14 @@
             }
         }
 
-        // ดักฟังเหตุการณ์เมื่อผู้ใช้พิมพ์หรือวางข้อมูลใน textarea ยกเว้นกด Enter
+        // ฟังก์ชันเพื่อเคลียร์ข้อมูลในช่องอินพุตและพื้นที่พรีวิว
+        function clearInput() {
+            document.getElementById("jsonInput").value = "";
+            document.getElementById("preview").innerHTML = "";
+        }
+
+        // ดักฟังเหตุการณ์เมื่อผู้ใช้พิมพ์หรือวางข้อมูลใน textarea
         document.getElementById("jsonInput").addEventListener("input", function(event) {
-            // ตรวจสอบหากไม่ได้กดปุ่ม Enter ให้แสดงตัวอย่าง
             if (event.inputType !== 'insertParagraph') {
                 previewFlex();
             }
