@@ -56,8 +56,20 @@
             }
         }
 
-        // ดักฟังเหตุการณ์เมื่อผู้ใช้พิมพ์หรือวางข้อมูลใน textarea
-        document.getElementById("jsonInput").addEventListener("input", previewFlex);
+        // ดักฟังเหตุการณ์เมื่อผู้ใช้พิมพ์หรือวางข้อมูลใน textarea ยกเว้นกด Enter
+        document.getElementById("jsonInput").addEventListener("input", function(event) {
+            // ตรวจสอบหากไม่ได้กดปุ่ม Enter ให้แสดงตัวอย่าง
+            if (event.inputType !== 'insertParagraph') {
+                previewFlex();
+            }
+        });
+
+        // ป้องกันไม่ให้กด Enter สร้างย่อหน้าใหม่ใน textarea
+        document.getElementById("jsonInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // ป้องกันไม่ให้กด Enter แล้วขึ้นบรรทัดใหม่
+            }
+        });
     </script>
 </body>
 </html>
