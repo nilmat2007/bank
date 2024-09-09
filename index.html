@@ -21,37 +21,43 @@
             width: 100%;
             min-height: 100px;
         }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
     <h1>Flex Message Preview</h1>
 
-    <textarea id="jsonInput" rows="10" cols="80" placeholder="ใส่โค้ด JSON ของ Flex Message ที่นี่"></textarea><br><br>
-    <button onclick="previewFlex()">แสดงตัวอย่าง</button>
+    <textarea id="jsonInput" placeholder="ใส่โค้ด JSON ของ Flex Message ที่นี่"></textarea><br><br>
 
     <div class="chatbox">
         <div id="preview"></div>
     </div>
 
     <script>
+        // ฟังก์ชันเพื่อแสดงตัวอย่าง Flex Message
         function previewFlex() {
-            // ดึงค่าจาก input
             var input = document.getElementById("jsonInput").value;
             
             try {
-                // แปลงเป็น JSON object
+                // แปลงโค้ด JSON
                 var flexContent = JSON.parse(input);
-                
-                // เรียกใช้ flex2html เพื่อแสดง Flex Message
+
+                // แสดง Flex Message โดยใช้ flex2html
                 flex2html("preview", {
                     type: "flex",
                     altText: "Flex Message",
                     contents: flexContent
                 });
             } catch (e) {
-                alert("รูปแบบ JSON ไม่ถูกต้อง กรุณาลองใหม่");
+                document.getElementById("preview").innerHTML = "<p>รูปแบบ JSON ไม่ถูกต้อง</p>";
             }
         }
+
+        // ดักฟังเหตุการณ์เมื่อผู้ใช้พิมพ์หรือวางข้อมูลใน textarea
+        document.getElementById("jsonInput").addEventListener("input", previewFlex);
     </script>
 </body>
 </html>
