@@ -47,6 +47,9 @@
         function previewFlex() {
             var input = document.getElementById("jsonInput").value;
             
+            // ล้างเนื้อหาตัวอย่างเก่า
+            document.getElementById("preview").innerHTML = "";
+
             try {
                 // แปลงโค้ด JSON
                 var flexContent = JSON.parse(input);
